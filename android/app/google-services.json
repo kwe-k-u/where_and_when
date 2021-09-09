@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "42593491831",
+    "firebase_url": "https://where-and-where-default-rtdb.firebaseio.com",
+    "project_id": "where-and-where",
+    "storage_bucket": "where-and-where.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42593491831:android:631c35adcc55e3159bdf72",
+        "android_client_info": {
+          "package_name": "com.duala.whereAndwhen.where_and_when"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42593491831-i46pu8p9bf2k7qc2ndh735i76so117a5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.duala.whereAndwhen.where_and_when",
+            "certificate_hash": "bdbdcd965fe92e100dd468b1bb30e5e81e8655b8"
+          }
+        },
+        {
+          "client_id": "42593491831-g1pdf2ebcngaisdiq6cflrqgn4254qd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTvGwqZCaFuElHqjTzafbOaPVrEqunwKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42593491831-g1pdf2ebcngaisdiq6cflrqgn4254qd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
