@@ -1,11 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:where_and_when/utils/models/event.dart';
 
 
 class ClassTile extends StatelessWidget {
+  final Event event;
   final bool enabled = Random().nextBool();
-  ClassTile({Key? key}) : super(key: key);
+  ClassTile({
+    required this.event,
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +23,9 @@ class ClassTile extends StatelessWidget {
         padding: EdgeInsets.all(8
         ),
         child: ListTile(
-          title: Text("Class name"),
-          subtitle: Text("Zoom: 29990909 password: 3493843",
+          title: Text(event.name, overflow: TextOverflow.ellipsis,),
+          subtitle: Text(event.location.url ??
+              "ZoomID: ${event.location.meetingId}\nPassword: ${event.location.password}",
             maxLines: 2,
             overflow: TextOverflow.fade,
           ),
@@ -28,8 +33,9 @@ class ClassTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("9:45 AM"),
-              Text("11:45 AM"),
+              Text(event.startTime.format(context)),
+              Text("to"),
+              Text(event.endTime.format(context)),
             ],
           ),
         )

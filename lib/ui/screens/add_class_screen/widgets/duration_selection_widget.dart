@@ -122,9 +122,11 @@ class __TimeSelectionButtonState extends State<_TimeSelectionButton> {
           child: Text(widget.text),
         )
             : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(widget.text),
-            Text(widget.time.toString())
+            Text(widget.time!.format(context))
 
           ],
         ),
