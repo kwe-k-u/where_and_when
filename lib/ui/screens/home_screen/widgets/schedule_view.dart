@@ -5,7 +5,11 @@ import 'package:where_and_when/utils/models/event_location.dart';
 
 
 class ScheduleView extends StatefulWidget {
-  const ScheduleView({Key? key}) : super(key: key);
+  List<Event> events;
+  ScheduleView({
+    Key? key,
+    required this.events
+      }) : super(key: key);
 
   @override
   _ScheduleViewState createState() => _ScheduleViewState();
@@ -16,12 +20,24 @@ class _ScheduleViewState extends State<ScheduleView> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-      child: ListView.separated(
+      child: widget.events.isNotEmpty ?  ListView.separated(
         separatorBuilder: (context, index) => Container(height: 12,),
-        itemCount: 7,
-          itemBuilder: (context, index) => ClassTile(
-            event: Event(name: "name", notes: "notes", start: TimeOfDay.now(), end: TimeOfDay.now(), location: EventLocation(url: "url", meetingId: "meetingId", password: "password"), days: [5,4]),
-          )
+        itemCount: widget.events.length,
+          itemBuilder: (context, index) {
+            Event current = widget.events.elementAt(index);
+            return ClassTile(
+              event: Event(
+                  name: current.name,
+                  notes: current.notes,
+                  start: current.startTime,
+                  end: current.endTime,
+                  location: current.location,
+                  days: current.days),
+            );
+          }
+      )
+          : Center(
+        child: Text("No classes for this day"),
       )
     );
   }

@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:where_and_when/ui/screens/add_class_screen/add_class_screen.dart';
 import 'package:where_and_when/ui/screens/home_screen/widgets/custom_drawer.dart';
 import 'package:where_and_when/ui/screens/home_screen/widgets/schedule_view.dart';
+import 'package:where_and_when/utils/helpers/database.dart';
+import 'package:where_and_when/utils/models/app_state.dart';
+import 'package:provider/provider.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-
     initialIndex = today.weekday;
   }
 
@@ -27,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return DefaultTabController(
         length: 7,
         initialIndex: initialIndex-1,
@@ -66,13 +72,27 @@ class _HomeScreenState extends State<HomeScreen> {
           body: TabBarView(
             children: [
 
-              ScheduleView(),
-              ScheduleView(),
-              ScheduleView(),
-              ScheduleView(),
-              ScheduleView(),
-              ScheduleView(),
-              ScheduleView(),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(0),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(1),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(2),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(3),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(4),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(5),
+              ),
+              ScheduleView(
+                events: context.read<AppState>().getEventsByDay(6),
+              ),
 
             ],
           ),

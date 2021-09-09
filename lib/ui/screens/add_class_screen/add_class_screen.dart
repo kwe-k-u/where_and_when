@@ -89,20 +89,26 @@ class _AddClassScreenState extends State<AddClassScreen> {
 
               ElevatedButton(
                   onPressed: () async{
-                    Event event = new Event(
+
+                    if (_selectedIndexes == null || _selectedIndexes!.isEmpty){
+                      //todo show snack bar
+                    } else {
+                      Event event = new Event(
                         name: name.text,
                         notes: notes.text,
                         start: start,
                         end: end,
                         location: EventLocation(
-                          url: link.text,
-                          password: null,
-                          meetingId: null
-                        ), days: _selectedIndexes,
-                    );
+                            url: link.text,
+                            password: null,
+                            meetingId: null
+                        ),
+                        days: _selectedIndexes,
+                      );
 
-                    await uploadEvent(event);
-                    Navigator.pop(context);
+                      await uploadEvent(event);
+                      Navigator.pop(context);
+                    }
                   },
                   child: Text("Save")
               ),

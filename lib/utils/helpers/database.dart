@@ -25,7 +25,8 @@ Future<List<Event>> getEvents() async{
   if (data.exists){
     Map<dynamic, dynamic> map = Map.from(data.value);
     map.forEach((key, value) {
-      Event.fromJson(Map<String, dynamic>.from(value) );
+      events.add(
+          Event.fromJson(Map<String, dynamic>.from(value) ));
     });
   }
 
