@@ -12,6 +12,7 @@ const String NOTES_COLUMN = "notes";
 const String START_TIME_COLUMN =  "startTime";
 const String END_TIME_COLUMN = "endTime";
 const String LOCATION_COLUMN = "location";
+const String REPEAT_DAYS_COLUMN = "repeatDays";
 
 
 

@@ -3,7 +3,12 @@ import 'package:where_and_when/ui/widgets/custom_text_field.dart';
 
 
 class OccurranceSelectionWidget extends StatefulWidget {
-  const OccurranceSelectionWidget({Key? key}) : super(key: key);
+  final TextEditingController? linkController;
+
+  const OccurranceSelectionWidget({
+    Key? key,
+    this.linkController
+  }) : super(key: key);
 
   @override
   _OccurranceSelectionWidgetState createState() => _OccurranceSelectionWidgetState();
@@ -39,7 +44,11 @@ class _OccurranceSelectionWidgetState extends State<OccurranceSelectionWidget> {
           SizedBox(
               width: size.width * 0.6,
 
-              child: _Selection(current: _value))
+              child: _Selection(
+                  current: _value,
+                linkController: widget.linkController,
+              )
+          )
 
 
 
@@ -56,8 +65,11 @@ class _OccurranceSelectionWidgetState extends State<OccurranceSelectionWidget> {
 
 class _Selection extends StatefulWidget {
   String current;
+  TextEditingController? linkController;
+
   _Selection({
     required this.current,
+    this.linkController,
     Key? key
   }) : super(key: key);
 
@@ -74,6 +86,7 @@ class __SelectionState extends State<_Selection> {
       return CustomTextField(
         width: size.width * 0.4,
           label: "Link",
+        controller: widget.linkController,
       );
       return Row(
         children: [
