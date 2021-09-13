@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:where_and_when/ui/screens/home_screen/home_screen.dart';
+import 'package:where_and_when/ui/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:where_and_when/utils/helpers/database.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 
@@ -34,16 +35,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
-        future: Future.wait([
-          Firebase.initializeApp(),
-          getEvents()
-        ]),
+        future: Firebase.initializeApp(),
           builder: (context, snapshot)
           {
             if (snapshot.connectionState == ConnectionState.done){
-              List<dynamic> data = snapshot.data! as List<dynamic>;
-              context.read<AppState>().addAllEvents = data.elementAt(1);
-              return HomeScreen();
+              return SignInScreen();
             }
             else
               return Scaffold(
