@@ -17,52 +17,36 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Container(
+        width: size.width,
+        height: size.height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-    return FutureBuilder(
-        future: getEvents(),
-        builder: (context, snapshot)
-        {
-          if (snapshot.connectionState == ConnectionState.done){
-            context.read<AppState>().addAllEvents = snapshot.data as List<Event>;
-            return Scaffold(
-              body: Container(
-                width: size.width,
-                height: size.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+            ElevatedButton(
+                onPressed: (){
+                  signIn().then((value) {
+                    if (value != null){
+                      context.read<AppState>().user = value;
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=> HomeScreen()
+                          )
+                      );
+                    } else{
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Couldn't Sign in. Try Again!"))
+                      );
+                    }
+                  });
+                },
+                child: Text("Sign In with Google"))
 
-                    ElevatedButton(
-                        onPressed: (){
-                          signIn().then((value) {
-                            if (value != null){
-                              context.read<AppState>().user = value;
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context)=> HomeScreen()
-                                  )
-                              );
-                            } else{
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Couldn't Sign in. Try Again!"))
-                              );
-                            }
-                          });
-                        },
-                        child: Text("Sign In with Google"))
-
-                  ],
-                ),
-              ),
-            );
-          }
-          else
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-        }
+          ],
+        ),
+      ),
     );
   }
 }

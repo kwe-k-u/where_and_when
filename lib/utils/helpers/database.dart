@@ -2,25 +2,26 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart' hide Event;
 import 'package:where_and_when/utils/models/event.dart';
 
-Future<void> uploadEvent(Event event) async{
+Future<void> uploadEvent(User user,Event event) async{
 
   FirebaseDatabase database = FirebaseDatabase.instance;
 
-  DatabaseReference reference = database.reference().child("events").push();
+  DatabaseReference reference = database.reference().child("${user.uid}/events").push();
 
   reference.set(event.toJson());
 }
 
 
 
-Future<List<Event>> getEvents() async{
+Future<List<Event>> getEvents(User user) async{
   List<Event> events = [];
   FirebaseDatabase database = FirebaseDatabase.instance;
 
-  DataSnapshot data = await database.reference().child("events").get();
+  DataSnapshot data = await database.reference().child("${user.uid}/events").get();
 
   if (data.exists){
     Map<dynamic, dynamic> map = Map.from(data.value);

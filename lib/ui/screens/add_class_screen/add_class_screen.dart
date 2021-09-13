@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:smart_select/smart_select.dart';
 import 'package:where_and_when/ui/screens/add_class_screen/widgets/duration_selection_widget.dart';
 import 'package:where_and_when/ui/screens/add_class_screen/widgets/location_selection_widget.dart';
 import 'package:where_and_when/ui/screens/add_class_screen/widgets/occurrence_selection_widget.dart';
 import 'package:where_and_when/ui/widgets/custom_text_field.dart';
 import 'package:where_and_when/utils/helpers/database.dart';
+import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:where_and_when/utils/models/event.dart';
 import 'package:where_and_when/utils/models/event_location.dart';
+import 'package:provider/provider.dart';
+
+
+
 
 class AddClassScreen extends StatefulWidget {
   const AddClassScreen({Key? key}) : super(key: key);
@@ -106,8 +110,9 @@ class _AddClassScreenState extends State<AddClassScreen> {
                         days: _selectedIndexes,
                       );
 
-                      await uploadEvent(event);
-                      Navigator.pop(context);
+                      await uploadEvent(context.read<AppState>().user,event);
+                      context.read<AppState>().addEvent = event;
+                      Navigator.pop(context, true);
                     }
                   },
                   child: Text("Save")

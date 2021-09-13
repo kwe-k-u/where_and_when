@@ -7,6 +7,7 @@ import 'package:where_and_when/ui/screens/home_screen/widgets/schedule_view.dart
 import 'package:where_and_when/utils/helpers/database.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:provider/provider.dart';
+import 'package:where_and_when/utils/models/event.dart';
 
 
 
@@ -32,82 +33,101 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
+    return FutureBuilder(
+        future: getEvents(context.read<AppState>().user),
+        builder: (context, snapshot)
+        {
+          if (snapshot.connectionState == ConnectionState.done){
+            context.read<AppState>().addAllEvents = snapshot.data as List<Event>;
+            return  DefaultTabController(
+                length: 7,
+                initialIndex: initialIndex-1,
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: Text("Good morning Kweku,"),
+                    bottom: TabBar(
+                      isScrollable: true,
+                      tabs: [
+                        Tab(
+                          child: Text("Mon"),
+                        ),
+                        Tab(
+                          child: Text("Tue"),
+                        ),
+                        Tab(
+                          child: Text("Wed"),
+                        ),
+                        Tab(
+                          child: Text("Thurs"),
+                        ),
+                        Tab(
+                          child: Text("Fri"),
+                        ),
+                        Tab(
+                          child: Text("Sat"),
+                        ),
+                        Tab(
+                          child: Text("Sun"),
+                        ),
+                      ],
+                    ),
+                  ),
 
-    return DefaultTabController(
-        length: 7,
-        initialIndex: initialIndex-1,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Good morning Kweku,"),
-            bottom: TabBar(
-              isScrollable: true,
-              tabs: [
-                Tab(
-                  child: Text("Mon"),
-                ),
-                Tab(
-                  child: Text("Tue"),
-                ),
-                Tab(
-                  child: Text("Wed"),
-                ),
-                Tab(
-                  child: Text("Thurs"),
-                ),
-                Tab(
-                  child: Text("Fri"),
-                ),
-                Tab(
-                  child: Text("Sat"),
-                ),
-                Tab(
-                  child: Text("Sun"),
-                ),
-              ],
-            ),
-          ),
+                  drawer: CustomDrawer(),
 
-          drawer: CustomDrawer(),
+                  body: TabBarView(
+                    children: [
 
-          body: TabBarView(
-            children: [
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(0),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(1),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(2),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(3),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(4),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(5),
+                      ),
+                      ScheduleView(
+                        events: context.read<AppState>().getEventsByDay(6),
+                      ),
 
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(0),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(1),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(2),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(3),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(4),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(5),
-              ),
-              ScheduleView(
-                events: context.read<AppState>().getEventsByDay(6),
-              ),
-
-            ],
-          ),
+                    ],
+                  ),
 
 
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context)=> AddClassScreen()
-                  )
-              );
-            },
-          ),
-        )
+                  floatingActionButton: FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=> AddClassScreen()
+                          )
+                      ).then((value) {
+                        if (value)
+                          setState(() {
+
+                          });
+                      });
+                    },
+                  ),
+                )
+            );
+          }
+          else
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+        }
     );
   }
 }
