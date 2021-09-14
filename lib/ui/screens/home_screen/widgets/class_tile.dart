@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:where_and_when/utils/helpers/shared_preferences.dart';
 import 'package:where_and_when/utils/models/event.dart';
@@ -30,10 +30,10 @@ class ClassTile extends StatelessWidget {
             //todo copy url;
             if (await getTapPreference()){
               if (event.location.url != null)
-                ClipboardManager.copyToClipBoard(event.location.url);
+                Clipboard.setData(ClipboardData(text: event.location.url));
               else{
-                ClipboardManager.copyToClipBoard(event.location.meetingId);
-                ClipboardManager.copyToClipBoard(event.location.password);
+                Clipboard.setData(ClipboardData(text: event.location.meetingId));
+                Clipboard.setData(ClipboardData(text: event.location.password));
 
               }
               ScaffoldMessenger.of(context).showSnackBar(
@@ -43,7 +43,7 @@ class ClassTile extends StatelessWidget {
               );
 
             } else {
-              // launch(urlString)
+              launch(event.location.url!);
             }
           },
           onLongPress: (){

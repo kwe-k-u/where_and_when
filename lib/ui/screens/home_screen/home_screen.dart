@@ -29,11 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
     initialIndex = today.weekday;
 
     if (today.hour <= 11)
-      welcomeText += " Morning";
+      welcomeText += " Morning ";
     else if (today.hour <= 16)
-        welcomeText += " Afternoon";
+        welcomeText += " Afternoon ";
     else
-      welcomeText += " Evening";
+      welcomeText += " Evening ";
 
   }
 
