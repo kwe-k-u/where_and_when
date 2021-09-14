@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:42593491831:android:631c35adcc55e3159bdf72",
+        "mobilesdk_app_id": "1:42593491831:android:1dcf4103d30939229bdf72",
         "android_client_info": {
-          "package_name": "com.duala.whereAndwhen.where_and_when"
+          "package_name": "com.duala.when_and_where"
         }
       },
       "oauth_client": [
         {
-          "client_id": "42593491831-i46pu8p9bf2k7qc2ndh735i76so117a5.apps.googleusercontent.com",
+          "client_id": "42593491831-iv6mvip5p1bu2k32lb51mlc0snue3cts.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.duala.whereAndwhen.where_and_when",
+            "package_name": "com.duala.when_and_where",
             "certificate_hash": "bdbdcd965fe92e100dd468b1bb30e5e81e8655b8"
           }
         },
