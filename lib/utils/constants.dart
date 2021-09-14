@@ -24,3 +24,6 @@ const String ONLINE_MEETING_ID = "meetingId";
 
 //inPerson location fields
 const String IN_PERSON_LOCATION = "in_person_location";
+
+
+const String SHARED_PREF_TAP_TO_COPY = "copy_to_clipboard";

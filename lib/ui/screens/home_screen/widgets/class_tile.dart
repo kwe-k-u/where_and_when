@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:where_and_when/utils/helpers/shared_preferences.dart';
 import 'package:where_and_when/utils/models/event.dart';
 
 
@@ -23,6 +26,29 @@ class ClassTile extends StatelessWidget {
         padding: EdgeInsets.all(8
         ),
         child: ListTile(
+          onTap: () async{
+            //todo copy url;
+            if (await getTapPreference()){
+              if (event.location.url != null)
+                ClipboardManager.copyToClipBoard(event.location.url);
+              else{
+                ClipboardManager.copyToClipBoard(event.location.meetingId);
+                ClipboardManager.copyToClipBoard(event.location.password);
+
+              }
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text("Copied meeting details to clipboard")
+                  )
+              );
+
+            } else {
+              // launch(urlString)
+            }
+          },
+          onLongPress: (){
+            //todo show pop with options for delete and edit
+          },
           title: Text(event.name, overflow: TextOverflow.ellipsis,),
           subtitle: Text(event.location.url ??
               "ZoomID: ${event.location.meetingId}\nPassword: ${event.location.password}",

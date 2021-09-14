@@ -21,11 +21,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DateTime today = DateTime.now();
   int initialIndex = 0; //index for the day that today is
+  String welcomeText = "Good";
 
   @override
   void initState() {
     super.initState();
     initialIndex = today.weekday;
+
+    if (today.hour <= 11)
+      welcomeText += " Morning";
+    else if (today.hour <= 16)
+        welcomeText += " Afternoon";
+    else
+      welcomeText += " Evening";
+
   }
 
 
@@ -44,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 initialIndex: initialIndex-1,
                 child: Scaffold(
                   appBar: AppBar(
-                    title: Text("Good morning Kweku,"),
+                    title: Text(welcomeText + (context.read<AppState>().user.displayName ?? context.read<AppState>().user.email!.split("@")[0])),
                     bottom: TabBar(
                       isScrollable: true,
                       tabs: [

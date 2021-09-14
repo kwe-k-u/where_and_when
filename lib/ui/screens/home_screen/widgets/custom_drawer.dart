@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:where_and_when/utils/models/app_state.dart';
+import 'package:provider/provider.dart';
 
 
 class CustomDrawer extends StatelessWidget {
@@ -20,9 +22,9 @@ class CustomDrawer extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(),
+                  child: Image.network(context.read<AppState>().user.photoURL!),
                 ),
-                Text("User's name")
+                Text(context.read<AppState>().user.displayName ?? context.read<AppState>().user.email!.split("@")[0])
               ],
             ),
           ),
