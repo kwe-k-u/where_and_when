@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:where_and_when/ui/screens/add_class_screen/add_class_screen.dart';
+import 'package:where_and_when/utils/helpers/database.dart';
 import 'package:where_and_when/utils/helpers/shared_preferences.dart';
 import 'package:where_and_when/utils/models/event.dart';
 
@@ -58,8 +59,8 @@ class ClassTile extends StatelessWidget {
                     TextButton(
                       child: Text("Yes"),
                       onPressed: (){
-                        launch(event.location.url!);
                         ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                        launch(event.location.url!);
                       },
                     )
                   ],
@@ -86,8 +87,8 @@ class ClassTile extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text("Delete event"),
-                      onTap: (){
-
+                      onTap: ()async{
+                        await deleteEvent(context: context, event: event);
                       },
                     ),
                   ],

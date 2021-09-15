@@ -65,8 +65,8 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
 
 
 class _Selection extends StatefulWidget {
-  String current;
-  TextEditingController? linkController;
+  final String current;
+  final TextEditingController? linkController;
 
   _Selection({
     required this.current,

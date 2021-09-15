@@ -1,6 +1,5 @@
 
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:where_and_when/utils/constants.dart';
 import 'package:where_and_when/utils/models/event_location.dart';

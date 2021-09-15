@@ -4,10 +4,8 @@ import 'package:where_and_when/ui/screens/add_class_screen/widgets/location_sele
 import 'package:where_and_when/ui/screens/add_class_screen/widgets/occurrence_selection_widget.dart';
 import 'package:where_and_when/ui/widgets/custom_text_field.dart';
 import 'package:where_and_when/utils/helpers/database.dart';
-import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:where_and_when/utils/models/event.dart';
 import 'package:where_and_when/utils/models/event_location.dart';
-import 'package:provider/provider.dart';
 
 
 
@@ -118,7 +116,6 @@ class _AddClassScreenState extends State<AddClassScreen> {
                       );
                     } else {
                       Event event = new Event(
-                        //todo add reference
                         name: name.text,
                         notes: notes.text,
                         start: start,
@@ -131,9 +128,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
                         days: _selectedIndexes,
                       );
 
-                      event.reference = await uploadEvent(context.read<AppState>().user,event);
+                      await uploadEvent(context: context, event: event);
 
-                      context.read<AppState>().addEvent = event;
                       Navigator.pop(context, true);
                     }
                   },

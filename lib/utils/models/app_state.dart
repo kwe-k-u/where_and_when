@@ -2,7 +2,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:where_and_when/utils/helpers/database.dart';
 import 'package:where_and_when/utils/models/event.dart';
 
 class AppState extends ChangeNotifier{
@@ -38,6 +37,12 @@ class AppState extends ChangeNotifier{
     });
 
     return list;
+  }
+
+
+  void removeEvent(Event event){
+    this._events.remove(event);
+    notifyListeners();
   }
 
 

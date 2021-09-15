@@ -100,7 +100,7 @@ class _DurationSelectionWidgetState extends State<DurationSelectionWidget> {
 class _TimeSelectionButton extends StatefulWidget {
   final void Function() onTap;
   final String text;
-  TimeOfDay? time;
+  final TimeOfDay? time;
 
   _TimeSelectionButton({
     required this.onTap,

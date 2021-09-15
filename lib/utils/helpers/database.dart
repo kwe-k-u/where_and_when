@@ -4,12 +4,16 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart' hide Event;
+import 'package:flutter/cupertino.dart';
 import 'package:where_and_when/utils/constants.dart';
+import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:where_and_when/utils/models/event.dart';
+import 'package:provider/provider.dart';
 
-Future<String> uploadEvent(User user,Event event) async{
+Future<void> uploadEvent({required BuildContext context,required Event event}) async{
   DatabaseReference reference;
   FirebaseDatabase database = FirebaseDatabase.instance;
+  User user = context.read<AppState>().user;
 
   //create a new reference if event does not have one
   if (event.reference == null)
@@ -19,8 +23,8 @@ Future<String> uploadEvent(User user,Event event) async{
 
   reference.set(event.toJson());
 
-
-  return reference.key;
+  event.reference = reference.key;
+  context.read<AppState>().addEvent = event;
 }
 
 
@@ -46,8 +50,11 @@ Future<List<Event>> getEvents(User user) async{
 
 
 
-Future<void> deleteEvent({required User user, required Event event}) async{
-
+Future<void> deleteEvent({required BuildContext context, required Event event}) async{
+  //todo add listener to widgets
+  User user = context.read<AppState>().user;
   FirebaseDatabase database = FirebaseDatabase.instance;
+
+  context.read<AppState>().removeEvent(event);
   await database.reference().child("${user.uid}/events/${event.reference}").remove();
 }

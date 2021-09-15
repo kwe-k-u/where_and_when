@@ -1,9 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:where_and_when/ui/screens/home_screen/home_screen.dart';
 import 'package:where_and_when/ui/screens/sign_in_screen/sign_in_screen.dart';
-import 'package:where_and_when/utils/helpers/database.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 
 void main() {
