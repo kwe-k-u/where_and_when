@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:where_and_when/ui/screens/profile_screen/profile_screen.dart';
+import 'package:where_and_when/utils/helpers/auth.dart';
+import 'package:where_and_when/utils/models/app_state.dart';
+import 'package:provider/provider.dart';
 
 
 class CustomDrawer extends StatelessWidget {
@@ -20,23 +24,45 @@ class CustomDrawer extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(),
+                  child: Image.network(context.read<AppState>().user.photoURL!),
                 ),
-                Text("User's name")
+                Text(context.read<AppState>().user.displayName ?? context.read<AppState>().user.email!.split("@")[0])
               ],
             ),
           ),
 
           ListTile(
             title: Text("Profile"),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> ProfileScreen()
+                  )
+              );
+            },
           ),
 
           ListTile(
             title: Text("Sync with"),
+            onTap: (){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("To be implemented Soon!")
+                )
+              );
+              // ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(content: Text("Awaiting implementation"),
+              //     actions: [TextButton(child: Text("Okay"), onPressed: (){},)])
+              // );
+            },
           ),
 
           ListTile(
             title: Text("Log out"),
+            onTap: (){
+              signOut().then((value) => context.read<AppState>().user = null
+              );
+              Navigator.pop(context);
+            },
           ),
         ],
       ),

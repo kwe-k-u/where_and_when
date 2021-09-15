@@ -13,7 +13,11 @@ import 'package:provider/provider.dart';
 
 
 class AddClassScreen extends StatefulWidget {
-  const AddClassScreen({Key? key}) : super(key: key);
+  final Event? event;
+  const AddClassScreen({
+    Key? key,
+    this.event,
+  }) : super(key: key);
 
   @override
   _AddClassScreenState createState() => _AddClassScreenState();
@@ -30,7 +34,16 @@ class _AddClassScreenState extends State<AddClassScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedIndexes!.add(DateTime.now().weekday-1);
+    if (widget.event == null)
+      _selectedIndexes!.add(DateTime.now().weekday-1);
+    else{
+      _selectedIndexes!.addAll(widget.event!.days ?? []);
+      name.text = widget.event!.name;
+      notes.text = widget.event!.notes;
+      link.text = widget.event!.location.url!;
+      end = widget.event!.endTime;
+      start = widget.event!.startTime;
+    }
   }
 
 
@@ -57,6 +70,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DurationSelectionWidget(
+                  initialEndTime: end,
+                  initialStartTime: start,
                   onEndSelected: (time) {
                     setState(() {
                       end = time;
@@ -95,7 +110,12 @@ class _AddClassScreenState extends State<AddClassScreen> {
                   onPressed: () async{
 
                     if (_selectedIndexes == null || _selectedIndexes!.isEmpty){
-                      //todo show snack bar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("You have to select at least one repeat day"),
+                          backgroundColor: Colors.red,
+                        )
+                      );
                     } else {
                       Event event = new Event(
                         //todo add reference
@@ -126,5 +146,12 @@ class _AddClassScreenState extends State<AddClassScreen> {
         )
         )
     );
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    notes.dispose();
+    super.dispose();
   }
 }
