@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:where_and_when/ui/screens/profile_screen/profile_screen.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +32,13 @@ class CustomDrawer extends StatelessWidget {
 
           ListTile(
             title: Text("Profile"),
+            onTap: (){
+              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> ProfileScreen()
+                  )
+              );
+            },
           ),
 
           ListTile(

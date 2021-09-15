@@ -9,7 +9,9 @@ import 'package:where_and_when/utils/constants.dart';
 /// A value of TRUE implies copy to clipboard while FALSE implies launch meeting in zoom
 Future<bool> getTapPreference() async{
   SharedPreferences pref = await SharedPreferences.getInstance();
-  return pref.getBool(SHARED_PREF_TAP_TO_COPY) ?? false;
+  bool value = pref.getBool(SHARED_PREF_TAP_TO_COPY) ?? false;
+  print(value);
+  return value;
 }
 
 

@@ -125,4 +125,11 @@ class _AddClassScreenState extends State<AddClassScreen> {
         )
     );
   }
+
+  @override
+  void dispose() {
+    name.dispose();
+    notes.dispose();
+    super.dispose();
+  }
 }

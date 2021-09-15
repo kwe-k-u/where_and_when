@@ -27,20 +27,20 @@ class ClassTile extends StatelessWidget {
         ),
         child: ListTile(
           onTap: () async{
-            //todo copy url;
             if (await getTapPreference()){
               if (event.location.url != null)
                 Clipboard.setData(ClipboardData(text: event.location.url));
-              else{
-                Clipboard.setData(ClipboardData(text: event.location.meetingId));
+              else {
+                Clipboard.setData(
+                    ClipboardData(text: event.location.meetingId));
                 Clipboard.setData(ClipboardData(text: event.location.password));
-
               }
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                      content: Text("Copied meeting details to clipboard")
-                  )
-              );
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text("Copied meeting details to clipboard")
+                    )
+                );
+
 
             } else {
               launch(event.location.url!);
