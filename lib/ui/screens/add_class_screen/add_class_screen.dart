@@ -98,6 +98,7 @@ class _AddClassScreenState extends State<AddClassScreen> {
                       //todo show snack bar
                     } else {
                       Event event = new Event(
+                        //todo add reference
                         name: name.text,
                         notes: notes.text,
                         start: start,
@@ -110,7 +111,8 @@ class _AddClassScreenState extends State<AddClassScreen> {
                         days: _selectedIndexes,
                       );
 
-                      await uploadEvent(context.read<AppState>().user,event);
+                      event.reference = await uploadEvent(context.read<AppState>().user,event);
+
                       context.read<AppState>().addEvent = event;
                       Navigator.pop(context, true);
                     }

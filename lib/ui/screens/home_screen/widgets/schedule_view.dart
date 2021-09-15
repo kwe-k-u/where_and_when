@@ -1,12 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:where_and_when/ui/screens/home_screen/widgets/class_tile.dart';
 import 'package:where_and_when/utils/models/event.dart';
-import 'package:where_and_when/utils/models/event_location.dart';
 
 
 class ScheduleView extends StatefulWidget {
-  List<Event> events;
-  ScheduleView({
+  final List<Event> events;
+  const ScheduleView({
     Key? key,
     required this.events
       }) : super(key: key);
@@ -24,15 +23,8 @@ class _ScheduleViewState extends State<ScheduleView> {
         separatorBuilder: (context, index) => Container(height: 12,),
         itemCount: widget.events.length,
           itemBuilder: (context, index) {
-            Event current = widget.events.elementAt(index);
             return ClassTile(
-              event: Event(
-                  name: current.name,
-                  notes: current.notes,
-                  start: current.startTime,
-                  end: current.endTime,
-                  location: current.location,
-                  days: current.days),
+              event: widget.events.elementAt(index),
             );
           }
       )

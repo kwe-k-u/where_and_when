@@ -1,5 +1,6 @@
 
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:where_and_when/utils/constants.dart';
 import 'package:where_and_when/utils/models/event_location.dart';
@@ -11,6 +12,7 @@ class Event{
   late TimeOfDay endTime;
   late EventLocation location;
   late List<int?>? days;
+  late String? reference;
 
 
   Event({
@@ -19,7 +21,8 @@ class Event{
     required dynamic start,
     required dynamic end,
     required this.location,
-    required this.days
+    required this.days,
+    this.reference
 }){
     if (start.runtimeType == String)
       this.startTime = _parseTime(start);
@@ -51,7 +54,8 @@ class Event{
         start: map[START_TIME_COLUMN],
         end: map[END_TIME_COLUMN],
         location: EventLocation.fromJson(Map<String, dynamic>.from(map[LOCATION_COLUMN])),
-        days: days
+        days: days,
+      reference: map[EVENT_REFERENCE]
     );
   }
 

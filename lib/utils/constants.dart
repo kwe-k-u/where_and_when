@@ -21,6 +21,8 @@ const String ONLINE_URL = "meetingLink";
 const String ONLINE_PASSWORD = "password";
 const String ONLINE_MEETING_ID = "meetingId";
 
+const String EVENT_REFERENCE = "reference";
+
 
 //inPerson location fields
 const String IN_PERSON_LOCATION = "in_person_location";
