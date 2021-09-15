@@ -3,10 +3,15 @@ import "package:flutter/material.dart";
 
 
 class DurationSelectionWidget extends StatefulWidget {
+  final TimeOfDay? initialStartTime;
+  final TimeOfDay? initialEndTime;
   final Function(TimeOfDay date) onStartSelected;
   final Function(TimeOfDay date) onEndSelected;
+
   const DurationSelectionWidget({
     Key? key,
+    this.initialEndTime,
+    this.initialStartTime,
     required this.onStartSelected,
     required this.onEndSelected,
   }) : super(key: key);
@@ -19,6 +24,13 @@ class _DurationSelectionWidgetState extends State<DurationSelectionWidget> {
   TimeOfDay? _start;
   TimeOfDay? _end;
 
+
+  @override
+  void initState() {
+    super.initState();
+    _start = widget.initialStartTime;
+    _end = widget.initialEndTime;
+  }
 
   @override
   Widget build(BuildContext context) {

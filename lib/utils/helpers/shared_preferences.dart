@@ -10,7 +10,6 @@ import 'package:where_and_when/utils/constants.dart';
 Future<bool> getTapPreference() async{
   SharedPreferences pref = await SharedPreferences.getInstance();
   bool value = pref.getBool(SHARED_PREF_TAP_TO_COPY) ?? false;
-  print(value);
   return value;
 }
 

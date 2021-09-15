@@ -10,7 +10,7 @@ class AppState extends ChangeNotifier{
   List<Event> _events = [];
 
 
-  set user (User u){
+  set user (User? u){
     this._user = u;
     notifyListeners();
   }

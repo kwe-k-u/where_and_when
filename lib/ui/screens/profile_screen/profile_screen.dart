@@ -63,7 +63,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   await setTapPreference(value);
                   setState(() {
                     _onTap = value;
-
                   });
                 })
           ],
