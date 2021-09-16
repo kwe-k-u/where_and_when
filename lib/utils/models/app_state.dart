@@ -15,13 +15,14 @@ class AppState extends ChangeNotifier{
   }
 
   set addEvent (Event e) {
+    this._events.removeWhere((element) => element.reference == e.reference);
     this._events.add(e);
     notifyListeners();
   }
 
   set addAllEvents(List<Event> list){
     this._events = list;
-    // notifyListeners();
+    notifyListeners();
   }
 
 
