@@ -24,7 +24,12 @@ class CustomDrawer extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.network(context.read<AppState>().user.photoURL!),
+                  child: Image.network(
+                      context.read<AppState>().user.photoURL!,
+                    loadingBuilder: (context, widget, chunk) {
+                        return Icon(Icons.image);
+                    },
+                  ),
                 ),
                 Text(context.read<AppState>().user.displayName ?? context.read<AppState>().user.email!.split("@")[0])
               ],

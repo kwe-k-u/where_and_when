@@ -33,7 +33,7 @@ Future<List<Event>> getEvents(User user) async{
   List<Event> events = [];
   FirebaseDatabase database = FirebaseDatabase.instance;
 
-  DataSnapshot data = await database.reference().child("${user.uid}/events").get();
+  DataSnapshot data = await database.reference().child("${user.uid}/events").orderByChild(START_TIME_COLUMN).get();
   if (data.exists){
     Map<String, dynamic> map = Map.from(data.value);
     map.forEach((key, value) {
@@ -42,6 +42,13 @@ Future<List<Event>> getEvents(User user) async{
           Event.fromJson(Map<String, dynamic>.from(value) ));
     });
   }
+
+  //sorting the events by start times
+  events.sort((f,s){
+    int fTime = (f.startTime.hour * 60) + (f.startTime.minute);
+    int sTime = (s.startTime.hour * 60) + (s.startTime.minute);
+    return fTime.compareTo(sTime);
+  });
 
 
   return events;

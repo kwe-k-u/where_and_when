@@ -11,19 +11,63 @@ import 'package:where_and_when/utils/models/event.dart';
 
 class ClassTile extends StatelessWidget {
   final Event event;
-  final bool enabled = Random().nextBool();
+  // final bool enabled = Random().nextBool();
   ClassTile({
     required this.event,
     Key? key}) : super(key: key);
 
+
+  int _state(){ // 0 = disabled   1= green    2 = enabled
+    int result = 0;
+    DateTime date = DateTime.now();
+
+    //converting all the times into integers
+    int start = (event.startTime.hour * 60) + (event.startTime.minute);
+    int end = (event.endTime.hour * 60) + (event.endTime.minute);
+    int now = (date.hour * 60) + (date.minute);
+
+    //if event is past, disable
+    //if current time is between the event start and end, show green
+
+    if (event.days!.contains(date.day)) {//if the event is not today, disable
+      if (now < start){ //if event hasn't started yet, enable
+        result = 2;
+      } else if (now > end){
+        result = 0;
+      } else { //if event is ongoing, set tile to green
+        result = 1;
+      }
+
+    }
+
+
+
+    return result;
+  }
+
+
+  Color? _tileColor(){
+    int status = _state();
+    if (status == 0)
+      return null;
+    else if (status == 1)
+      return Colors.greenAccent;
+    else
+      return  Colors.grey.withOpacity(0.2);
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12)
       ),
-      elevation:  enabled ? 12 : 2,
-      color: enabled ? null : Colors.grey.withOpacity(0.2),
+      elevation:  _state() < 0 ? 12 : 2,
+      color: _tileColor(),
       child: Padding(
         padding: EdgeInsets.all(8
         ),
