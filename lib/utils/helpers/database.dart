@@ -10,6 +10,8 @@ import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:where_and_when/utils/models/event.dart';
 import 'package:provider/provider.dart';
 
+
+///Adds an [event] to the logged in user's database
 Future<void> uploadEvent({required BuildContext context,required Event event}) async{
   DatabaseReference reference;
   FirebaseDatabase database = FirebaseDatabase.instance;
@@ -28,7 +30,7 @@ Future<void> uploadEvent({required BuildContext context,required Event event}) a
 }
 
 
-
+///Retrieves the [user]'s saved events
 Future<List<Event>> getEvents(User user) async{
   List<Event> events = [];
   FirebaseDatabase database = FirebaseDatabase.instance;
@@ -57,6 +59,7 @@ Future<List<Event>> getEvents(User user) async{
 
 
 
+///Deletes the [event] from the user's events
 Future<void> deleteEvent({required BuildContext context, required Event event}) async{
   //todo add listener to widgets
   User user = context.read<AppState>().user;

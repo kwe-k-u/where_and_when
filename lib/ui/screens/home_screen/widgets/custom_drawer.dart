@@ -64,8 +64,10 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: Text("Log out"),
             onTap: (){
-              signOut().then((value) => context.read<AppState>().user = null
+              signOut().then(
+                      (value) => context.read<AppState>().user = null
               );
+              Navigator.pop(context);
               Navigator.pop(context);
             },
           ),

@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
+
+
+///Signs in the user using Google and Firebase auth
 Future<User?> signIn() async {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -31,6 +35,9 @@ Future<User?> signIn() async {
   return user;
 }
 
+
+
+///Signs out the user
 Future signOut() async {
   FirebaseAuth auth = FirebaseAuth.instance;
 
