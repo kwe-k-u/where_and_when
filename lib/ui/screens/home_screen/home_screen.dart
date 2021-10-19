@@ -5,6 +5,7 @@ import 'package:where_and_when/ui/screens/add_class_screen/add_class_screen.dart
 import 'package:where_and_when/ui/screens/home_screen/widgets/custom_drawer.dart';
 import 'package:where_and_when/ui/screens/home_screen/widgets/schedule_view.dart';
 import 'package:where_and_when/utils/helpers/database.dart';
+import 'package:where_and_when/utils/helpers/notification_helper.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 import 'package:provider/provider.dart';
 import 'package:where_and_when/utils/models/event.dart';
@@ -28,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     initialIndex = today.weekday;
 
+
     if (today.hour <= 11)
       welcomeText += " Morning ";
     else if (today.hour <= 16)
@@ -35,9 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
     else
       welcomeText += " Evening ";
 
+    initializeScheduledNotification();
+
   }
 
 
+  //todo check the pending notifications and check if there are equal numbers for the number of tasks
+  //todo when a task is deleted or modified make the same changes for the scheduled notifications
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, snapshot)
         {
           if (snapshot.connectionState == ConnectionState.done){
-            context.read<AppState>().addAllEvents = snapshot.data as List<Event>;
+            context.read<AppState>().addAllEvents = snapshot.data as List<Event>;//todo fix this error
             return  DefaultTabController(
                 length: 7,
                 initialIndex: initialIndex-1,
@@ -138,5 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
             );
         }
     );
+
+
   }
+
+
 }

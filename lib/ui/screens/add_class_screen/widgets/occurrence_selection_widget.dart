@@ -8,7 +8,7 @@ import 'package:smart_select/src/model/chosen.dart';
 class OccurrenceSelectionWidget extends StatefulWidget {
 
   final List<int?>? initial;
-  final void Function(dynamic)? onChange;
+  final void Function(dynamic) onChange;
   OccurrenceSelectionWidget({
     required this.initial,
     required this.onChange,

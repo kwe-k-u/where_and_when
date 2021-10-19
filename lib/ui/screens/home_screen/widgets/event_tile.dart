@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,10 +7,10 @@ import 'package:where_and_when/utils/helpers/shared_preferences.dart';
 import 'package:where_and_when/utils/models/event.dart';
 
 
-class ClassTile extends StatelessWidget {
+class EventTile extends StatelessWidget {
   final Event event;
   // final bool enabled = Random().nextBool();
-  ClassTile({
+  EventTile({
     required this.event,
     Key? key}) : super(key: key);
 

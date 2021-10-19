@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:where_and_when/ui/screens/home_screen/widgets/class_tile.dart';
+import 'package:where_and_when/ui/screens/home_screen/widgets/event_tile.dart';
 import 'package:where_and_when/utils/models/event.dart';
 
 
@@ -23,7 +23,7 @@ class _ScheduleViewState extends State<ScheduleView> {
         separatorBuilder: (context, index) => Container(height: 12,),
         itemCount: widget.events.length,
           itemBuilder: (context, index) {
-            return ClassTile(
+            return EventTile(
               event: widget.events.elementAt(index),
             );
           }

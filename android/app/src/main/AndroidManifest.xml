@@ -1,8 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.duala.whereAndwhen.where_and_when">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
    <application
         android:label="When and Where"
         android:icon="@mipmap/launcher_icon">
+       <receiver android:name="com.duala.whereAndwhen.where_and_when">
+           <intent-filter>
+               <action android:name="android.intent.action.BOOT_COMPLETED" />
+               <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+           </intent-filter>
+       </receiver>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
