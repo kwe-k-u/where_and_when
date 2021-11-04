@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,15 +9,18 @@ import 'package:where_and_when/utils/models/event.dart';
 
 class ClassTile extends StatelessWidget {
   final Event event;
+  final bool isToday;
   // final bool enabled = Random().nextBool();
   ClassTile({
     required this.event,
+    required this.isToday,
     Key? key}) : super(key: key);
 
 
   int _state(){ // 0 = disabled   1= green    2 = enabled
     int result = 0;
     DateTime date = DateTime.now();
+
 
     //converting all the times into integers
     int start = (event.startTime.hour * 60) + (event.startTime.minute);
@@ -29,6 +30,8 @@ class ClassTile extends StatelessWidget {
     //if event is past, disable
     //if current time is between the event start and end, show green
 
+
+    // return 0;
     if (event.days!.contains(date.day)) {//if the event is not today, disable
       if (now < start){ //if event hasn't started yet, enable
         result = 2;
@@ -48,12 +51,13 @@ class ClassTile extends StatelessWidget {
 
   Color? _tileColor(){
     int status = _state();
+    if (!this.isToday)
+      return  Colors.white;
+    
     if (status == 0)
-      return null;
+      return Colors.grey.withOpacity(0.3);
     else if (status == 1)
       return Colors.greenAccent;
-    else
-      return  Colors.grey.withOpacity(0.2);
   }
 
 

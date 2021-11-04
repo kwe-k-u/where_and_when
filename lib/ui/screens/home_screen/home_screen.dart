@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    initialIndex = today.weekday;
+    initialIndex = today.weekday -1;
 
     if (today.hour <= 11)
       welcomeText += " Morning ";
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context.read<AppState>().addAllEvents = snapshot.data as List<Event>;
             return  DefaultTabController(
                 length: 7,
-                initialIndex: initialIndex-1,
+                initialIndex: initialIndex,
                 child: Scaffold(
                   appBar: AppBar(
                     title: Text(welcomeText + (context.read<AppState>().user.displayName ?? context.read<AppState>().user.email!.split("@")[0])),
@@ -89,23 +89,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       ScheduleView(
                         events: context.read<AppState>().getEventsByDay(0),
+                        isToday: initialIndex ==0,
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==1,
                         events: context.read<AppState>().getEventsByDay(1),
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==2,
                         events: context.read<AppState>().getEventsByDay(2),
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==3,
                         events: context.read<AppState>().getEventsByDay(3),
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==4,
                         events: context.read<AppState>().getEventsByDay(4),
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==5,
                         events: context.read<AppState>().getEventsByDay(5),
                       ),
                       ScheduleView(
+                        isToday: initialIndex ==6,
                         events: context.read<AppState>().getEventsByDay(6),
                       ),
 

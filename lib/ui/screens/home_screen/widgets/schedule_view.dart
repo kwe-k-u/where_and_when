@@ -5,9 +5,11 @@ import 'package:where_and_when/utils/models/event.dart';
 
 class ScheduleView extends StatefulWidget {
   final List<Event> events;
+  final bool isToday;
   const ScheduleView({
     Key? key,
-    required this.events
+    required this.events,
+    required this.isToday,
       }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class _ScheduleViewState extends State<ScheduleView> {
         itemCount: widget.events.length,
           itemBuilder: (context, index) {
             return ClassTile(
+              isToday: widget.isToday,
               event: widget.events.elementAt(index),
             );
           }
