@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.duala.whereAndwhen.where_and_when">
    <application
         android:label="When and Where"
+       tools:replace="android:label"
+       tools:targetApi="n"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
@@ -18,6 +21,13 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
+
+            <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-5333220833779174~7736269652"/>
+
+
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual
