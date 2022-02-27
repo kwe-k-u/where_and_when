@@ -1,14 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.duala.whereAndwhen.where_and_when">
+    package="com.duala.where_and_when">
    <application
-        android:label="When and Where"
+       android:label="When and Where"
        tools:replace="android:label"
        tools:targetApi="n"
-        android:icon="@mipmap/launcher_icon">
+       android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
+            android:exported="true"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -23,9 +24,6 @@
               />
 
 
-            <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="ca-app-pub-5333220833779174~7736269652"/>
 
 
             <!-- Displays an Android View that continues showing the launch screen
@@ -46,6 +44,11 @@
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
+            android:value="2"
+
+            />
+       <meta-data
+           android:name="com.google.android.gms.ads.APPLICATION_ID"
+           android:value="ca-app-pub-5333220833779174~7736269652"/>
     </application>
 </manifest>

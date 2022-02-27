@@ -32,7 +32,7 @@ class ClassTile extends StatelessWidget {
 
 
     // return 0;
-    if (event.days!.contains(date.day)) {//if the event is not today, disable
+    if (event.days.contains(date.day)) {//if the event is not today, disable
       if (now < start){ //if event hasn't started yet, enable
         result = 2;
       } else if (now > end){

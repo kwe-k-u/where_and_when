@@ -35,9 +35,9 @@ Future<List<Event>> getEvents(User user) async{
   List<Event> events = [];
   FirebaseDatabase database = FirebaseDatabase.instance;
 
-  DataSnapshot data = await database.reference().child("${user.uid}/events").orderByChild(START_TIME_COLUMN).get();
+  DataSnapshot data = await database.ref().child("${user.uid}/events").orderByChild(START_TIME_COLUMN).get();
   if (data.exists){
-    Map<String, dynamic> map = Map.from(data.value);
+    Map<String, dynamic> map = Map.from(data as Map<dynamic,dynamic>);
     map.forEach((key, value) {
       value[EVENT_REFERENCE] = key;
       events.add(

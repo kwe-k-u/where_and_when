@@ -33,7 +33,7 @@ class AppState extends ChangeNotifier{
   List<Event> getEventsByDay(int dayIndex){
     List<Event> list = [];
     this.events.forEach((element) {
-      if (element.days!.contains(dayIndex))
+      if (element.days.contains(dayIndex))
         list.add(element);
     });
 

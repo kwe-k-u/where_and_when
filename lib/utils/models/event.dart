@@ -10,7 +10,7 @@ class Event{
   late TimeOfDay startTime;
   late TimeOfDay endTime;
   late EventLocation location;
-  late List<int?>? days;
+  late List<int> days;
   late String? reference;
 
 
@@ -45,7 +45,7 @@ class Event{
 
 
   factory Event.fromJson(Map<String, dynamic> map){
-    List<int?>? days = [];
+    List<int> days = [];
     map[REPEAT_DAYS_COLUMN].forEach((element) => days.add(element));
     return Event(
         name: map[NAME_COLUMN],

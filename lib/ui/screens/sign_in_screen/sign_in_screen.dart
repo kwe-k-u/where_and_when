@@ -3,17 +3,27 @@ import 'package:where_and_when/ui/screens/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:where_and_when/utils/helpers/auth.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
+import 'package:where_and_when/Yodo1Mas.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  SignInScreen({Key? key}) : super(key: key){
+    Yodo1Mas.instance.init("Your app key", (successful) {
+
+    });
+  }
+
+
 
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {Yodo1Mas.instance.init("Your app key", (successful) {
+
+  });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(

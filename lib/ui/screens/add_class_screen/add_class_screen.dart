@@ -22,7 +22,7 @@ class AddClassScreen extends StatefulWidget {
 }
 
 class _AddClassScreenState extends State<AddClassScreen> {
-  List<int?>? _selectedIndexes = [];
+  List<int> _selectedIndexes = [];
   TextEditingController notes = new TextEditingController();
   TextEditingController name = new TextEditingController();
   TextEditingController link = new TextEditingController();
@@ -33,9 +33,9 @@ class _AddClassScreenState extends State<AddClassScreen> {
   void initState() {
     super.initState();
     if (widget.event == null)
-      _selectedIndexes!.add(DateTime.now().weekday-1);
+      _selectedIndexes.add(DateTime.now().weekday-1);
     else{
-      _selectedIndexes!.addAll(widget.event!.days ?? []);
+      _selectedIndexes.addAll(widget.event!.days);
       name.text = widget.event!.name;
       notes.text = widget.event!.notes;
       link.text = widget.event!.location.url!;
@@ -107,7 +107,7 @@ class _AddClassScreenState extends State<AddClassScreen> {
               ElevatedButton(
                   onPressed: () async{
 
-                    if (_selectedIndexes == null || _selectedIndexes!.isEmpty){
+                    if (_selectedIndexes.isEmpty){
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("You have to select at least one repeat day"),

@@ -1,10 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:where_and_when/environment.dart';
 import 'package:where_and_when/ui/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:where_and_when/utils/models/app_state.dart';
 
-void main() {
+void main() async{
+  await dotenv.load(fileName: ".env");
+
   runApp(
     ChangeNotifierProvider<AppState>(
       create: (context) => AppState(),
@@ -34,7 +38,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: FutureBuilder(
-        future: Firebase.initializeApp(),
+        future: Firebase.initializeApp(
+          options: FirebaseOptions(
+              apiKey: Environment.apiKey,
+              appId: Environment.appId,
+              messagingSenderId: Environment.messagingSenderId,
+              projectId: Environment.projectId
+          )
+        ),
           builder: (context, snapshot)
           {
             if (snapshot.connectionState == ConnectionState.done){
