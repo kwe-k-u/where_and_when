@@ -20,6 +20,7 @@ class OccurrenceSelectionWidget extends StatefulWidget {
 class _OccurrenceSelectionWidgetState extends State<OccurrenceSelectionWidget> {
 
   List<int> _selectedIndexes = [];
+  List<String> days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 
   @override
@@ -28,20 +29,53 @@ class _OccurrenceSelectionWidgetState extends State<OccurrenceSelectionWidget> {
     _selectedIndexes = widget.initial;
   }
 
+
+
+  List<ChoiceChip> _genOptions(){
+    List<ChoiceChip> widgets = [];
+    for (int index = 0; index < days.length; index++){
+      widgets.add(ChoiceChip(
+          label: Text(days[index]),
+          selected: _selectedIndexes.contains(index),
+        selectedColor: Colors.blue,
+        onSelected: (selected){
+              Set<int> set = _selectedIndexes.toSet();
+              if (selected){ // add day to selected indexes
+                set.add(index);
+              } else { // remove day from selected indexes
+                set.remove(index);
+              }
+              setState(() {
+                _selectedIndexes = set.toList();
+              });
+
+            print(_selectedIndexes);
+        },
+      ));
+    }
+
+    return widgets;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-
     return ListTile(
-      onTap: (){
+      title: Text("Selected days"),
+      subtitle: Text(_displayDays()),
+      onTap: () {
         showModalBottomSheet(
-          context: context,
-          builder: (context)  {
-            return Container(child: Text("test"),);
-          }
+            context: context,
+            builder: (context) {
+              bool _mon = false;
+              return Wrap(
+                children: _genOptions(),
+              );
+            }
         );
       },
     );
-
 
 
     // return SmartSelect<int?>.multiple(
@@ -76,14 +110,15 @@ class _OccurrenceSelectionWidgetState extends State<OccurrenceSelectionWidget> {
     // );
   }
 
-  // String _displayDays(S2MultiSelected<int?>? selected) {
-  //   String text = "None selected";
-  //
-  //   if (selected!= null && selected.value != null){
-  //     List<int?> values = selected.value!;
-  //
-  //   }
-  //
-  //   return selected.toString();
-  // }
+  String _displayDays() {
+    if (_selectedIndexes.isEmpty){
+      return "None selected";
+    }
+    String text = "";
+    _selectedIndexes.forEach((element) {text += "${days[element]} ";});
+
+
+    return text.trim();
+  }
 }
+
